@@ -1,23 +1,21 @@
-import React from "react";
 import { nextauthOptions } from "@/lib/nextauthOptions";
 import { getServerSession } from "next-auth/next";
+import PropertyForm from "@/components/PropertyForm";
+import React from "react";
 import { redirect } from "next/navigation";
 
-export default async function RestrictedPage() {
-  // get the session
+export default async function CreateProperty() {
   const session = await getServerSession(nextauthOptions);
 
-  // redirect to signin if there is no session.
   if (!session?.user) {
     const url = new URL("/api/auth/signin", "http://localhost:3000");
-    url.searchParams.append("callbackUrl", "/restricted");
+    url.searchParams.append("callbackUrl", "/properties/create");
     redirect(url.toString());
   }
 
-  // display the page
   return (
     <div>
-      <h1>Welcome to the Restricted Page, {session?.user?.email}</h1>
+      <PropertyForm />
     </div>
   );
 }
