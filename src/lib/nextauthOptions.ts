@@ -28,7 +28,7 @@ export const nextauthOptions: AuthOptions = {
         if (!user) {
           throw new Error("User does not exist.");
         }
-        console.log(credentials?.password);
+
         //validate password
         const passwordIsValid = await bcrypt.compare(
           credentials?.password!,

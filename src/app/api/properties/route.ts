@@ -3,15 +3,6 @@ import { NextResponse } from "next/server";
 import { nextauthOptions } from "@/lib/nextauthOptions";
 import clientPromise from "@/lib/mongodb";
 
-interface RequestBody {
-  propertyAddress: string;
-  monthlyRent: string;
-  leaseApplicationFee: string;
-  reservationFee: string;
-  propertyOwner: string;
-  listedBy: string;
-}
-
 export async function POST(request: Request) {
   try {
     const session = await getServerSession(nextauthOptions);

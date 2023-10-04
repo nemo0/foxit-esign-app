@@ -19,37 +19,42 @@ export interface PropertyDetailProps {
 
 const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
   return (
-    <div className="flex">
-      <div className="flex w-full">
-        <div className="w-1/2 h-full">
-          <img
-            src={property.propertyImageUrl}
-            alt="Property"
-            className="w-full w-full object-cover"
-          />
-        </div>
+    <div className="flex p-6">
+      <div className="w-1/2">
+        <img
+          src={property.propertyImageUrl}
+          alt="Property"
+          className="w-full h-full object-cover rounded-lg shadow-md"
+        />
+      </div>
 
-        <div className="w-1/2 p-12 bg-white">
-          <h2 className="text-2xl font-bold mb-6">
-            {property.propertyAddress}
-          </h2>
-          <p className="mb-4">
-            <strong>Monthly Rent:</strong> ${property.monthlyRent}
-          </p>
-          <p className="mb-4">
-            <strong>Lease Application Fee:</strong> $
-            {property.leaseApplicationFee}
-          </p>
-          <p className="mb-4">
-            <strong>Reservation Fee:</strong> ${property.reservationFee}
-          </p>
-          <p className="mb-4">
-            <strong>Property Owner Email:</strong> {property.propertyOwner}
-          </p>
-          <p className="mb-4">
-            <strong>Owner Name:</strong> {property.ownerName}
-          </p>
-        </div>
+      <div className="w-1/2 p-12 bg-white rounded-lg ml-6">
+        <h2 className="text-3xl font-bold mb-8 text-indigo-700">
+          {property.propertyAddress}
+        </h2>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Monthly Rent:</strong>
+          <span className="text-indigo-600"> ${property.monthlyRent}</span>
+        </p>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Lease Application Fee:</strong>
+          <span className="text-indigo-600">
+            {" "}
+            ${property.leaseApplicationFee}
+          </span>
+        </p>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Reservation Fee:</strong>
+          <span className="text-indigo-600"> ${property.reservationFee}</span>
+        </p>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Property Owner Email: </strong>
+          {property.propertyOwner}
+        </p>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Owner Name: </strong>
+          {property.ownerName}
+        </p>
       </div>
     </div>
   );

@@ -28,11 +28,13 @@ export default async function Properties() {
   const { properties } = await getProperties();
 
   return (
-    <div className="flex flex-wrap justify-center gap-4">
-      {properties.length &&
-        properties.map((property: any, index: number) => {
-          return <PropertyCard key={index} details={property} />;
-        })}
+    <div>
+      <div className="flex flex-wrap justify-center gap-4">
+        {properties.length &&
+          properties.map((property: any, index: number) => {
+            return <PropertyCard key={index} details={property} />;
+          })}
+      </div>
     </div>
   );
 }

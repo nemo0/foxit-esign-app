@@ -28,6 +28,7 @@ type FormData = {
   leaseApplicationFee: string;
   reservationFee: string;
   ownerName: string;
+  _id: string;
 };
 
 export async function POST(request: Request) {
@@ -43,7 +44,6 @@ export async function POST(request: Request) {
 
     const folderResponse = await axios.post(
       "https://na1.foxitesign.foxit.com/api/templates/createFolder",
-
       {
         folderName: "folder name",
         templateIds: [303830],
@@ -162,6 +162,10 @@ export async function POST(request: Request) {
         signInSequence: false,
         createEmbeddedSigningSession: true,
         createEmbeddedSigningSessionForAllParties: true,
+        custom_field1: {
+          name: "property_id",
+          value: body._id || "Getting null here!!",
+        },
         signSuccessUrl: "",
         signDeclineUrl: "",
         themeColor: "#0066CB",
