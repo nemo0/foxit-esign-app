@@ -1,14 +1,13 @@
 "use client";
 
-import React, { InputHTMLAttributes, SelectHTMLAttributes } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { PropertyDetailProps } from "./PropertyDetail";
+import { IPropertyDetails } from "./PropertyForm";
 import axios from "axios";
 import PureModal from "react-pure-modal";
 import "react-pure-modal/dist/react-pure-modal.min.css";
-import { useRouter } from "next/navigation";
 
-type FormData = {
+export interface FormData {
   leaseStartDate: string;
   leaseEndDate: string;
   reservationFeePaymentMode: "cash" | "check" | "money order";
@@ -29,16 +28,22 @@ type FormData = {
   email: string;
   emergencyContact: string;
   spouseName: string;
-};
+  monthlyRent?: string;
+  reserveationFee?: string;
+  propertyAddress?: string;
+  leaseApplicationFee?: string;
+  reservationFee?: string;
+  ownerName?: string;
+  propertyName?: string;
+  _id?: string;
+}
 
-const LeaseForm: React.FC<PropertyDetailProps> = ({ property }) => {
-  const { register, handleSubmit, watch } = useForm<FormData>();
+const LeaseForm = ({ property }: { property: IPropertyDetails }) => {
+  const { register, handleSubmit } = useForm<FormData>();
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [embedUrl, setEmbedUrl] = React.useState("");
   const [webhookData, setWebhookData] = React.useState(null);
   const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
-
-  const router = useRouter();
 
   React.useEffect(() => {
     if (isFormSubmitted) {
@@ -51,7 +56,7 @@ const LeaseForm: React.FC<PropertyDetailProps> = ({ property }) => {
         }
       }, 5000); // Poll every 5 seconds
 
-      return () => clearInterval(interval); // Clean up on component unmount
+      return () => clearInterval(interval);
     }
   }, [isFormSubmitted]);
 
@@ -67,7 +72,9 @@ const LeaseForm: React.FC<PropertyDetailProps> = ({ property }) => {
       setEmbedUrl(response.data.embeddedSessionURL);
       setModalIsOpen(true);
       setIsFormSubmitted(true);
+      console.log(response.data.embeddedSessionURL);
     } catch (error) {
+      alert("Error leasing property");
       console.log(error);
     }
   };

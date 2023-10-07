@@ -1,25 +1,14 @@
-// components/PropertyCard.tsx
-
 import Link from "next/link";
 import React from "react";
+import { getServerSession } from "next-auth/next";
+import { nextauthOptions } from "@/lib/nextauthOptions";
+import { IPropertyDetails } from "./PropertyForm";
 
-interface PropertyDetails {
-  _id: string;
-  propertyAddress: string;
-  monthlyRent: number;
-  leaseApplicationFee: number;
-  reservationFee: number;
-  propertyOwner: string;
-  propertyImageUrl: string;
-  ownerName: string;
-  isLeased: boolean;
-}
+const PropertyCard = async ({ details }: { details: IPropertyDetails }) => {
+  const session = await getServerSession(nextauthOptions);
 
-interface PropertyCardProps {
-  details: PropertyDetails;
-}
+  const isPropertyOwner = session?.user?.email === details.propertyOwner;
 
-const PropertyCard: React.FC<PropertyCardProps> = ({ details }) => {
   return (
     <div className="bg-white shadow-lg rounded p-4 w-80 m-4 relative overflow-hidden">
       {details.isLeased && (
@@ -35,7 +24,10 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ details }) => {
         className="w-full h-40 object-cover rounded-t"
       />
       <div className="p-4">
-        <h3 className="font-bold text-xl mb-2">{details.propertyAddress}</h3>
+        <h3 className="font-bold text-xl mb-2">{details.propertyName}</h3>
+        <p className="text-gray-700">
+          <strong>Owner:</strong> {details.propertyAddress}
+        </p>
         <p className="text-gray-700">
           <strong>Owner:</strong> {details.ownerName}
         </p>
@@ -51,7 +43,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ details }) => {
         <Link href={`/properties/${details._id}`}>
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 w-full disabled:cursor-not-allowed disabled:opacity-50"
-            disabled={details.isLeased}
+            disabled={details.isLeased || isPropertyOwner}
           >
             Rent Property
           </button>

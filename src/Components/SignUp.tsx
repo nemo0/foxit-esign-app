@@ -1,4 +1,3 @@
-// components/SignUpForm.tsx
 "use client";
 
 import React from "react";
@@ -6,7 +5,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-interface RequestBody {
+export interface CreateUserRequestBody {
   firstName: string;
   lastName: string;
   emailId: string;
@@ -14,16 +13,16 @@ interface RequestBody {
   password: string;
 }
 
-const SignUpForm: React.FC = () => {
+const SignUpForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RequestBody>();
+  } = useForm<CreateUserRequestBody>();
 
   const router = useRouter();
 
-  const onSubmit = async (data: RequestBody) => {
+  const onSubmit = async (data: CreateUserRequestBody) => {
     try {
       await axios.post(`/api/create-user`, data);
       alert("User created successfully");

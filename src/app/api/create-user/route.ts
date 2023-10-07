@@ -2,17 +2,7 @@ import clientPromise from "@/lib/mongodb";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 import axios from "axios";
-
-interface RequestBody {
-  firstName: string;
-  lastName: string;
-  emailId: string;
-  address: string;
-  userRole: string;
-  department: string;
-  title: string;
-  password: string;
-}
+import { CreateUserRequestBody } from "@/components/SignUp";
 
 export async function POST(request: Request) {
   try {
@@ -26,11 +16,8 @@ export async function POST(request: Request) {
       lastName,
       emailId,
       address,
-      userRole,
-      department,
-      title,
       password,
-    }: RequestBody = data;
+    }: CreateUserRequestBody = data;
 
     if (!password) {
       throw new Error("Password is required");
@@ -45,13 +32,10 @@ export async function POST(request: Request) {
       email: emailId,
       password: hashedPassword,
       address,
-      role: userRole,
-      department,
-      title,
     });
 
     const foxitResponse = await axios.post(
-      `https://na1.foxitesign.foxit.com/api/users/create`,
+      `${process.env.FOXIT_BASE_URL}/users/create`,
       {
         allowAdvancedEmailValidation: false,
         user: {
@@ -59,9 +43,6 @@ export async function POST(request: Request) {
           lastName: lastName,
           emailId: emailId,
           address: address,
-          userRole: userRole,
-          department: department,
-          title: title,
           loginPassword: password,
           sendMailForPasswordReset: true,
           share_among_department: true,

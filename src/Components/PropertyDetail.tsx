@@ -1,23 +1,7 @@
-// components/PropertyDetail.tsx
-
 import React from "react";
+import { IPropertyDetails } from "./PropertyForm";
 
-export interface Property {
-  _id: string;
-  propertyAddress: string;
-  monthlyRent: string;
-  leaseApplicationFee: string;
-  reservationFee: string;
-  propertyOwner: string;
-  ownerName: string;
-  propertyImageUrl: string;
-}
-
-export interface PropertyDetailProps {
-  property: Property;
-}
-
-const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
+const PropertyDetail = ({ property }: { property: IPropertyDetails }) => {
   return (
     <div className="flex p-6">
       <div className="w-1/2">
@@ -30,8 +14,12 @@ const PropertyDetail: React.FC<PropertyDetailProps> = ({ property }) => {
 
       <div className="w-1/2 p-12 bg-white rounded-lg ml-6">
         <h2 className="text-3xl font-bold mb-8 text-indigo-700">
-          {property.propertyAddress}
+          {property.propertyName}
         </h2>
+        <p className="mb-4 text-lg">
+          <strong className="font-medium">Property Address:</strong>
+          <span className="text-indigo-600"> {property.propertyAddress}</span>
+        </p>
         <p className="mb-4 text-lg">
           <strong className="font-medium">Monthly Rent:</strong>
           <span className="text-indigo-600"> ${property.monthlyRent}</span>

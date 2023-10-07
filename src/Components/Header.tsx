@@ -1,5 +1,3 @@
-// components/Header.tsx
-
 import React from "react";
 
 import { Great_Vibes } from "next/font/google";
@@ -12,7 +10,7 @@ const greatVibes = Great_Vibes({
   weight: ["400"],
 });
 
-const Header: React.FC = async () => {
+const Header = async () => {
   const session = await getServerSession(nextauthOptions);
   return (
     <header className="bg-gray-900 text-white py-4">

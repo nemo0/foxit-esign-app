@@ -7,7 +7,7 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   const client = await clientPromise;
-  const db = client.db("foxit");
+  const db = client.db(process.env.DB_NAME);
   const id = new ObjectId(params.id);
 
   const property = await db.collection("properties").findOne({

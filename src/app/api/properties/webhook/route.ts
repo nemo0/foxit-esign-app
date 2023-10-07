@@ -23,7 +23,7 @@ export async function POST(request: Request) {
   });
 }
 
-export async function GET(request: Request) {
+export async function GET() {
   if (latestWebhookData) {
     return new Response(JSON.stringify(latestWebhookData), {
       status: 200,

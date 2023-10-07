@@ -1,35 +1,6 @@
 import axios from "axios";
 import { NextResponse } from "next/server";
-
-type FormData = {
-  leaseStartDate: string;
-  leaseEndDate: string;
-  reservationFeePaymentMode: "cash" | "check" | "money order";
-  applicantName: string;
-  agreeConditions: boolean;
-  applicantFirstName: string;
-  applicantMiddleName: string;
-  applicantLastName: string;
-  visitedProperty: boolean;
-  notVisitedProperty: boolean;
-  applicantSS: string;
-  dateOfBirth: string;
-  driverLicenseNumber: string;
-  driverLicenseState: string;
-  homePhone: string;
-  workPhone: string;
-  cell: string;
-  email: string;
-  emergencyContact: string;
-  spouseName: string;
-  monthlyRent: string;
-  reserveationFee: string;
-  propertyAddress: string;
-  leaseApplicationFee: string;
-  reservationFee: string;
-  ownerName: string;
-  _id: string;
-};
+import { FormData } from "@/components/PropertyLeaseForm";
 
 export async function POST(request: Request) {
   try {
@@ -43,7 +14,7 @@ export async function POST(request: Request) {
     }
 
     const folderResponse = await axios.post(
-      "https://na1.foxitesign.foxit.com/api/templates/createFolder",
+      `${process.env.FOXIT_BASE_URL}/api/templates/createFolder`,
       {
         folderName: "folder name",
         templateIds: [303830],
@@ -116,7 +87,7 @@ export async function POST(request: Request) {
           "Names and ages of individuals under 18": "John Doe 18, Jane Doe 16",
           "Home Phone": "body.homePhone",
           "Application is hereby made to rent the premises generally described as":
-            body.propertyAddress,
+            body.propertyName,
           "How Long?": "12 Months",
           by: "false",
           "Landlord Address": "Landlord Address",
@@ -159,13 +130,13 @@ export async function POST(request: Request) {
             sequence: 1,
           },
         ],
-        signInSequence: false,
-        createEmbeddedSigningSession: true,
-        createEmbeddedSigningSessionForAllParties: true,
         custom_field1: {
           name: "property_id",
           value: body._id || "Getting null here!!",
         },
+        signInSequence: false,
+        createEmbeddedSigningSession: true,
+        createEmbeddedSigningSessionForAllParties: true,
         signSuccessUrl: "",
         signDeclineUrl: "",
         themeColor: "#0066CB",
@@ -190,11 +161,6 @@ export async function POST(request: Request) {
     return NextResponse.json({
       embeddedSessionURL,
     });
-
-    // return NextResponse.json({
-    //   params,
-    //   body,
-    // });
   } catch (error: any) {
     console.error(error);
     return NextResponse.json({

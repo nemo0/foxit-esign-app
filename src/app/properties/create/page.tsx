@@ -8,9 +8,7 @@ export default async function CreateProperty() {
   const session = await getServerSession(nextauthOptions);
 
   if (!session?.user) {
-    const url = new URL("/api/auth/signin", "http://localhost:3000");
-    url.searchParams.append("callbackUrl", "/properties/create");
-    redirect(url.toString());
+    redirect("/api/auth/signin");
   }
 
   return (

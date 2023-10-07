@@ -2,12 +2,16 @@ import PropertyDetail from "@/components/PropertyDetail";
 import LeaseForm from "@/components/PropertyLeaseForm";
 import { ObjectId } from "mongodb";
 import React from "react";
-import axios from "axios";
 
 const getProperty = async (id: ObjectId) => {
-  const res = await axios.get(`http://localhost:3000/api/properties/${id}`);
+  const res = await fetch(`http://localhost:3000/api/properties/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 
-  const data = res.data;
+  const data = await res.json();
 
   return {
     property: data.property,

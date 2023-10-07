@@ -1,4 +1,3 @@
-// components/PropertyForm.tsx
 "use client";
 
 import React from "react";
@@ -6,7 +5,9 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
-interface PropertyDetails {
+export interface IPropertyDetails {
+  _id?: string;
+  propertyOwner?: string;
   propertyName: string;
   propertyAddress: string;
   monthlyRent: number;
@@ -17,16 +18,16 @@ interface PropertyDetails {
   isLeased: boolean;
 }
 
-const PropertyForm: React.FC = () => {
+const PropertyForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<PropertyDetails>();
+  } = useForm<IPropertyDetails>();
 
   const router = useRouter();
 
-  const onSubmit = async (data: PropertyDetails) => {
+  const onSubmit = async (data: IPropertyDetails) => {
     try {
       const payload = {
         ...data,
@@ -35,8 +36,9 @@ const PropertyForm: React.FC = () => {
 
       const { data: res } = await axios.post("/api/properties", payload);
       alert("Property created successfully");
-      router.push("/properties/");
+      router.push(`/properties/${res.property.insertedId}`);
     } catch (error: any) {
+      console.log(error);
       alert("Error creating property");
     }
   };

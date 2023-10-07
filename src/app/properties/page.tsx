@@ -20,9 +20,7 @@ export default async function Properties() {
 
   // redirect to signin if there is no session.
   if (!session?.user) {
-    const url = new URL("/api/auth/signin", "http://localhost:3000");
-    url.searchParams.append("callbackUrl", "/properties");
-    redirect(url.toString());
+    redirect("/api/auth/signin");
   }
 
   const { properties } = await getProperties();

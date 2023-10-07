@@ -6,7 +6,7 @@ const greatVibes = Great_Vibes({
   weight: ["400"],
 });
 
-const Homepage: React.FC = () => {
+const Homepage = () => {
   return (
     <div>
       <div className="relative h-screen">
