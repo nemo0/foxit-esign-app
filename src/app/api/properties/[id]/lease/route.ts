@@ -14,10 +14,10 @@ export async function POST(request: Request) {
     }
 
     const folderResponse = await axios.post(
-      `${process.env.FOXIT_BASE_URL}/api/templates/createFolder`,
+      `https://na1.foxitesign.foxit.com/api/templates/createFolder`,
       {
         folderName: "folder name",
-        templateIds: [303830],
+        templateIds: [308247],
         fields: {
           "Length of Time at Present Job": "24 Months",
           "How Long?_1": "12 Months",
