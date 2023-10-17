@@ -6,7 +6,7 @@ export async function POST(request: Request) {
   try {
     const body: FormData = await request.json();
 
-    const accessToken = process.env.FOXIT_API_KEY;
+    const accessToken = process.env.FOXIT_ACCESS_TOKEN;
     if (!accessToken) {
       return NextResponse.json({
         error: "Access token not found",

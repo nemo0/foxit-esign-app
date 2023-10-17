@@ -52,7 +52,7 @@ export async function POST(request: Request) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.FOXIT_API_KEY}`,
+          Authorization: `Bearer ${process.env.FOXIT_ACCESS_TOKEN}`,
         },
       }
     );
