@@ -55,9 +55,9 @@ export async function POST(request: Request) {
           Yes_4: "false",
           Yes_7: "false",
           Yes_6: "false",
-          "Applicantâ€™s Initials": body.applicantName,
+          "Applicant's Initials": body.applicantName,
           Yes_1: "false",
-          "Driverâ€™s License State": body.driverLicenseState,
+          "Driver's License State": body.driverLicenseState,
           "Emergency Contact Information": body.emergencyContact,
           "Business Phone_1": "Business Phone_1",
           "Length of Time at Present Job_1": "Length of Time at Present Job_1",
@@ -91,7 +91,7 @@ export async function POST(request: Request) {
           "How Long?": "12 Months",
           by: "false",
           "Landlord Address": "Landlord Address",
-          "Applicantâ€™s Initials_1": "Applicantâ€™s Initials_1",
+          "Applicant's Initials_1": "Applicant's Initials_1",
           "How Many?": "How Many?",
           "Spouse/Significant Other Name (must fill out a separate application)":
             body.spouseName,
@@ -99,7 +99,7 @@ export async function POST(request: Request) {
           "Visa Expiration Date": "Visa Expiration Date",
           No: "false",
           "cash or": "false",
-          "Applicantâ€™s Printed Name":
+          "Applicant's Printed Name":
             body.applicantFirstName + " " + body.applicantLastName,
           "Previous Landlord Address": "Previous Landlord Address",
           "Phone #": "7922008811",

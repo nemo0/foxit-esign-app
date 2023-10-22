@@ -47,7 +47,7 @@ const LeaseForm = ({ property }: { property: IPropertyDetails }) => {
 
   React.useEffect(() => {
     if (isFormSubmitted) {
-      // only start polling if form is submitted
+      // Only start polling if form is submitted
       const interval = setInterval(async () => {
         const res = await fetch("/api/properties/webhook");
         if (res.status === 200) {
