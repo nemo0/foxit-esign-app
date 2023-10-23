@@ -2,8 +2,8 @@
 
 import React from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import axios from "axios"; // Import Axios to make API calls
 
 export interface CreateUserRequestBody {
   firstName: string;
@@ -22,6 +22,7 @@ const SignUpForm = () => {
 
   const router = useRouter();
 
+  // Update the onSubmit function
   const onSubmit = async (data: CreateUserRequestBody) => {
     try {
       await axios.post(`/api/create-user`, data);

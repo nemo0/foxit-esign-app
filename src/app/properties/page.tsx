@@ -4,6 +4,7 @@ import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import PropertyCard from "@/components/PropertyCard";
 
+// Create a function to get the properties
 const getProperties = async () => {
   const res = await fetch("http://localhost:3000/api/properties");
 
@@ -15,14 +16,15 @@ const getProperties = async () => {
 };
 
 export default async function Properties() {
-  // get the session
+  // Get the session
   const session = await getServerSession(nextauthOptions);
 
-  // redirect to signin if there is no session.
+  // Redirect to signin if there is no session.
   if (!session?.user) {
     redirect("/api/auth/signin");
   }
 
+  // Call the getProperties function
   const { properties } = await getProperties();
 
   return (

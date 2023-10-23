@@ -3,9 +3,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { IPropertyDetails } from "./PropertyForm";
-import axios from "axios";
-import PureModal from "react-pure-modal";
-import "react-pure-modal/dist/react-pure-modal.min.css";
+import axios from "axios"; // Import Axios to make API calls
+import PureModal from "react-pure-modal"; // Import PureModal to display the embedded URL
+import "react-pure-modal/dist/react-pure-modal.min.css"; // Import PureModal CSS
 
 export interface FormData {
   leaseStartDate: string;
@@ -40,9 +40,10 @@ export interface FormData {
 
 const LeaseForm = ({ property }: { property: IPropertyDetails }) => {
   const { register, handleSubmit } = useForm<FormData>();
+  const [webhookData, setWebhookData] = React.useState(null);
+  // Add new states for modalIsOpen, embedUrl and isFormSubmitted
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
   const [embedUrl, setEmbedUrl] = React.useState("");
-  const [webhookData, setWebhookData] = React.useState(null);
   const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
 
   React.useEffect(() => {
@@ -60,6 +61,7 @@ const LeaseForm = ({ property }: { property: IPropertyDetails }) => {
     }
   }, [isFormSubmitted]);
 
+  // Update the onSubmit function
   const onSubmit = async (data: FormData) => {
     try {
       const response = await axios.post(
@@ -272,6 +274,8 @@ const LeaseForm = ({ property }: { property: IPropertyDetails }) => {
               Submit
             </button>
           </form>
+
+          {/* Add the PureModal Component */}
           <PureModal
             isOpen={modalIsOpen}
             closeButton="x"

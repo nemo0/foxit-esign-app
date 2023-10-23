@@ -3,6 +3,7 @@ import LeaseForm from "@/components/PropertyLeaseForm";
 import { ObjectId } from "mongodb";
 import React from "react";
 
+// Create a function to get the property
 const getProperty = async (id: ObjectId) => {
   const res = await fetch(`http://localhost:3000/api/properties/${id}`, {
     method: "GET",
@@ -25,6 +26,7 @@ export default async function PropertyDetailPage({
     id: ObjectId;
   };
 }) {
+  // Call the getProperty function
   const { property } = await getProperty(new ObjectId(id));
 
   return (

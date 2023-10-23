@@ -27,6 +27,7 @@ const PropertyForm = () => {
 
   const router = useRouter();
 
+  // Update the onSubmit function
   const onSubmit = async (data: IPropertyDetails) => {
     try {
       const payload = {
